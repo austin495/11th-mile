@@ -1,6 +1,6 @@
 'use client';
 import { Marquee } from "@/components/marquee";
-import { useScroll, useTransform, motion, useInView} from 'framer-motion';
+import { useScroll, useTransform, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import dynamic from "next/dynamic";
 import SmoothScroll from "@/components/smoothScroll";
@@ -47,62 +47,62 @@ const testimonials = [
 const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
 export default function Home() {
-    const container = useRef<HTMLDivElement | null>(null);
-    const container1 = useRef<HTMLDivElement | null>(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const slidesToShow = 3;
-    const totalSlides = extendedTestimonials.length;
-    const slideWidth = 100 / slidesToShow;
+  const container = useRef<HTMLDivElement | null>(null);
+  const container1 = useRef<HTMLDivElement | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slidesToShow = 3;
+  const totalSlides = extendedTestimonials.length;
+  const slideWidth = 100 / slidesToShow;
 
-    const { scrollYProgress: scrollYProgressContainer } = useScroll({
-      target: container,
-      offset: ['start start', 'end end'],
+  const { scrollYProgress: scrollYProgressContainer } = useScroll({
+    target: container,
+    offset: ['start start', 'end end'],
+  });
+
+  const { scrollYProgress: scrollYProgressContainer1 } = useScroll({
+    target: container1,
+    offset: ['start start', 'end end'],
+  });
+
+  const scale = useTransform(scrollYProgressContainer, [0, 1], [1, 1.3]);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    const animationFrameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId); // Cleanup on unmount
+    };
+  }, []);
+
+  useEffect(() => {
+    const splide = new Splide(".splide", {
+      autoScroll: {
+        speed: 1,
+      },
+      type: "loop",
+      perPage: 3,
+      gap: "1rem",
+      drag: "free",
+      focus: "center",
+      autoplay: true,
+      pauseOnHover: false,
+      arrows: false,
+      pagination: false,
     });
 
-    const { scrollYProgress: scrollYProgressContainer1 } = useScroll({
-      target: container1,
-      offset: ['start start', 'end end'],
-    });
+    splide.mount({ AutoScroll });
 
-    const scale = useTransform(scrollYProgressContainer, [0, 1], [1, 1.3]);
-
-    useEffect(() => {
-      const lenis = new Lenis();
-
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      const animationFrameId = requestAnimationFrame(raf);
-
-      return () => {
-        cancelAnimationFrame(animationFrameId); // Cleanup on unmount
-      };
-    }, []);
-
-    useEffect(() => {
-      const splide = new Splide(".splide", {
-        autoScroll: {
-          speed: 1,
-        },
-        type: "loop",
-        perPage: 3,
-        gap: "1rem",
-        drag: "free",
-        focus: "center",
-        autoplay: true,
-        pauseOnHover: false,
-        arrows: false,
-        pagination: false,
-      });
-
-      splide.mount({ AutoScroll });
-
-      return () => {
-        splide.destroy();
-      };
-    }, []);
+    return () => {
+      splide.destroy();
+    };
+  }, []);
 
   return (
     <main>
@@ -112,15 +112,15 @@ export default function Home() {
             <div className="flex flex-col justify-baseline items-start gap-10 w-full">
               <h1 className="text-8xl font-sans font-medium tracking-tight leading-[1.1em]">
                 <MaskText
-                  styles={{ 
+                  styles={{
                     maskText: "uppercase",
                     lineMask: "overflow-hidden",
                   }}
                   title="We are a digital agency that"
                 />
-                
+
                 <MaskText
-                  styles={{ 
+                  styles={{
                     maskText: "",
                     lineMask: "overflow-hidden font-mono font-medium",
                   }}
@@ -131,25 +131,25 @@ export default function Home() {
                 <div
                   className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
                 </div>
-                  <a
-                    href="#"
-                    title="payment"
-                    className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                    role="button"
+                <a
+                  href="#"
+                  title="payment"
+                  className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+                  role="button"
+                >
+                  Learn More
+                  <svg
+                    className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                    fill="none"
+                    width="10"
+                    height="10"
+                    viewBox="0 0 10 10"
+                    aria-hidden="true"
                   >
-                    Learn More
-                    <svg
-                      className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                      fill="none"
-                      width="10"
-                      height="10"
-                      viewBox="0 0 10 10"
-                      aria-hidden="true"
-                    >
-                      <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                      <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                    </svg>
-                  </a>
+                    <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
+                    <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
+                  </svg>
+                </a>
               </div>
             </div>
             <div className="flex flex-row gap-4 pl-2">
@@ -162,7 +162,7 @@ export default function Home() {
                 Scroll to explore
               </span>
             </div>
-          </div>  
+          </div>
         </div>
       </section>
 
@@ -204,25 +204,25 @@ export default function Home() {
         className="relative m-auto h-[200vh] pt-[50px]"
       >
         <div className="sticky top-0 overflow-hidden h-[100vh]">
-              <motion.div style={{scale}} className="w-[100%] h-[100%] px-[150px] top-0 absolute flex items-center justify-center">
-                <div className="w-full h-full relative">
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    className="object-cover"
-                  >
-                    <source src="/bg-video.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </motion.div>
+          <motion.div style={{ scale }} className="w-[100%] h-[100%] px-[150px] top-0 absolute flex items-center justify-center">
+            <div className="w-full h-full relative">
+              <video
+                autoPlay
+                loop
+                muted
+                className="object-cover"
+              >
+                <source src="/bg-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="text-center pt-[100px] flex flex-col items-center gap-5">
         <MaskText
-          styles={{ 
+          styles={{
             maskText: "text-6xl font-sans font-bold",
             lineMask: "overflow-hidden",
           }}
@@ -249,12 +249,12 @@ export default function Home() {
       <section className="testimonial py-[100px] flex flex-col items-center gap-10">
         <div className="max-w-[1440px] m-auto flex flex-col items-center gap-10">
           <MaskText
-              styles={{ 
-                maskText: "text-6xl font-sans font-semibold text-center w-[60%] leading-[1.2em]",
-                lineMask: "overflow-hidden",
-              }}
-              title="Teams like yours are building from their product data"
-            />
+            styles={{
+              maskText: "text-6xl font-sans font-semibold text-center w-[60%] leading-[1.2em]",
+              lineMask: "overflow-hidden",
+            }}
+            title="Teams like yours are building from their product data"
+          />
         </div>
         <div className="splide w-full">
           <div className="splide__track">
@@ -310,7 +310,7 @@ export default function Home() {
         <div className="max-w-[1440px] m-auto flex flex-col items-center gap-15">
           <div className="flex flex-col items-center gap-10">
             <MaskText
-              styles={{ 
+              styles={{
                 maskText: "text-6xl font-sans font-bold text-center leading-[1.2em]",
                 lineMask: "overflow-hidden",
               }}
@@ -320,12 +320,12 @@ export default function Home() {
 
           <div className="relative">
             <BackgroundLines className="flex flex-row items-center justify-between gap-x-10 gap-y-30 flex-wrap p-20 bg-[#ffffff0e] border-1 border-[#ffffff54] rounded-[40px] text-[#fff] backdrop:blur-8xl">
-              <div className="w-[61%] flex flex-col gap-5">
+              <div className="w-[61%] flex flex-col gap-5 z-1">
                 <p className="text-[18px] font-sans font-normal uppercase leading-[1.2em] tracking-wide">Cnsumer Tech</p>
                 <p className="text-[38px] font-sans font-normal">Mixpanel enables our product managers and designers to uncover and focus on larger opportunities for product discovery and improvement.</p>
                 <p className="text-[18px] font-sans font-normal"><strong>Sid Arora</strong>, Head of Data Products - Analytics and Experimentation</p>
               </div>
-              <div className="w-[35%] flex flex-col items-center justify-center">
+              <div className="w-[35%] flex flex-col items-center justify-center z-1">
                 <Image
                   src="/yelp.svg"
                   alt="Mixpanel Logo"
@@ -334,10 +334,10 @@ export default function Home() {
                   className="w-[80%] h-auto"
                 />
               </div>
-              <div className="w-[20%]">
+              <div className="w-[20%] z-1">
                 <p className="text-[18px] font-sans font-normal">More industry customers</p>
               </div>
-              <div className="w-[76%] flex flex-row items-center justify-between gap-5">
+              <div className="w-[76%] flex flex-row items-center justify-between gap-5 z-1">
                 <Image
                   src="/uber.svg"
                   alt="Mixpanel Logo"
@@ -376,7 +376,7 @@ export default function Home() {
         <div className="call-to-action_main">
           <div className="inner-wraper max-w-[1440px] m-auto flex flex-col items-center justify-center gap-5">
             <MaskText
-              styles={{ 
+              styles={{
                 maskText: "text-[45px] font-sans font-semibold w-[40%] text-center leading-[1.2em]",
                 lineMask: "overflow-hidden",
               }}
@@ -387,25 +387,25 @@ export default function Home() {
               <div
                 className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
               </div>
-                <a
-                  href="#"
-                  title="payment"
-                  className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                  role="button"
+              <a
+                href="#"
+                title="payment"
+                className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+                role="button"
+              >
+                Learn More
+                <svg
+                  className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                  fill="none"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  aria-hidden="true"
                 >
-                  Learn More
-                  <svg
-                    className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                    fill="none"
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    aria-hidden="true"
-                  >
-                    <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                    <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                  </svg>
-                </a>
+                  <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
+                  <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -415,17 +415,17 @@ export default function Home() {
 }
 
 
-const Section1 = ({scrollYProgress}: {scrollYProgress: any} ) => {
+const Section1 = ({ scrollYProgress }: { scrollYProgress: any }) => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
   return (
-    <motion.div style={{scale, rotate}} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-10">
+    <motion.div style={{ scale, rotate }} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-10">
       <section className="project1 bg-[#fff0dd] relative overflow-hidden py-[100px] text-black w-full h-full flex items-center justify-center">
         <div className="flex flex-row items-center justify-between gap-10 max-w-[1440px] m-auto">
           <div className="w-[50%] h-full flex flex-col justify-center items-start gap-5">
             <MaskText
-              styles={{ 
+              styles={{
                 maskText: "text-8xl font-sans font-bold leading-[1.2em]",
                 lineMask: "overflow-hidden",
               }}
@@ -436,25 +436,25 @@ const Section1 = ({scrollYProgress}: {scrollYProgress: any} ) => {
               <div
                 className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
               </div>
-                <a
-                  href="#"
-                  title="payment"
-                  className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                  role="button"
+              <a
+                href="#"
+                title="payment"
+                className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+                role="button"
+              >
+                Learn More
+                <svg
+                  className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                  fill="none"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  aria-hidden="true"
                 >
-                  Learn More
-                  <svg
-                    className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                    fill="none"
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    aria-hidden="true"
-                  >
-                    <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                    <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                  </svg>
-                </a>
+                  <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
+                  <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
+                </svg>
+              </a>
             </div>
           </div>
           <div className="w-[50%] h-full relative">
@@ -473,17 +473,17 @@ const Section1 = ({scrollYProgress}: {scrollYProgress: any} ) => {
   )
 }
 
-const Section2 = ({scrollYProgress}: {scrollYProgress: any} ) => {
+const Section2 = ({ scrollYProgress }: { scrollYProgress: any }) => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [-5, 0])
   return (
-    <motion.div style={{scale, rotate}} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-20">
+    <motion.div style={{ scale, rotate }} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-20">
       <section className="project1 bg-[#181818] relative overflow-hidden py-[100px] text-white w-full h-full flex items-center justify-center">
         <div className="flex flex-row items-center justify-between gap-10 max-w-[1440px] m-auto">
           <div className="w-[50%] h-full flex flex-col justify-center items-start gap-5">
             <MaskText
-              styles={{ 
+              styles={{
                 maskText: "text-8xl font-sans font-bold leading-[1.2em]",
                 lineMask: "overflow-hidden",
               }}
@@ -494,25 +494,25 @@ const Section2 = ({scrollYProgress}: {scrollYProgress: any} ) => {
               <div
                 className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
               </div>
-                <a
-                  href="#"
-                  title="payment"
-                  className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                  role="button"
+              <a
+                href="#"
+                title="payment"
+                className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+                role="button"
+              >
+                Learn More
+                <svg
+                  className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                  fill="none"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  aria-hidden="true"
                 >
-                  Learn More
-                  <svg
-                    className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                    fill="none"
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    aria-hidden="true"
-                  >
-                    <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                    <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                  </svg>
-                </a>
+                  <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
+                  <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
+                </svg>
+              </a>
             </div>
           </div>
           <div className="w-[50%] h-full relative">
@@ -531,17 +531,17 @@ const Section2 = ({scrollYProgress}: {scrollYProgress: any} ) => {
   )
 }
 
-const Section3 = ({scrollYProgress}: {scrollYProgress: any} ) => {
+const Section3 = ({ scrollYProgress }: { scrollYProgress: any }) => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [5, 0])
   return (
-    <motion.div style={{scale, rotate}} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-30">
+    <motion.div style={{ scale, rotate }} className="sticky top-0 h-screen flex flex-col items-center justify-center w-full z-30">
       <section className="project1 bg-[#FF5935] relative overflow-hidden py-[100px] text-black w-full h-full flex items-center justify-center">
         <div className="flex flex-row items-center justify-between gap-10 max-w-[1440px] m-auto">
           <div className="w-[50%] h-full flex flex-col justify-center items-start gap-5">
             <MaskText
-              styles={{ 
+              styles={{
                 maskText: "text-8xl font-sans font-bold leading-[1.2em]",
                 lineMask: "overflow-hidden",
               }}
@@ -552,25 +552,25 @@ const Section3 = ({scrollYProgress}: {scrollYProgress: any} ) => {
               <div
                 className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
               </div>
-                <a
-                  href="#"
-                  title="payment"
-                  className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                  role="button"
+              <a
+                href="#"
+                title="payment"
+                className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
+                role="button"
+              >
+                Learn More
+                <svg
+                  className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                  fill="none"
+                  width="10"
+                  height="10"
+                  viewBox="0 0 10 10"
+                  aria-hidden="true"
                 >
-                  Learn More
-                  <svg
-                    className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                    fill="none"
-                    width="10"
-                    height="10"
-                    viewBox="0 0 10 10"
-                    aria-hidden="true"
-                  >
-                    <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                    <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                  </svg>
-                </a>
+                  <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
+                  <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
+                </svg>
+              </a>
             </div>
           </div>
           <div className="w-[50%] h-full relative">
@@ -592,14 +592,14 @@ const Section3 = ({scrollYProgress}: {scrollYProgress: any} ) => {
 export function MaskText({ styles, title }: { styles: any, title: string }) {
 
   const body = useRef(null);
-  const isInView = useInView(body, {once: true, margin: "0px 0px -10% 0px"})
+  const isInView = useInView(body, { once: true, margin: "0px 0px -10% 0px" })
 
   const animation = {
-    initial: {y: "100%"},
-    enter: (i: number) => ({y: "0", transition: {duration: 0.75, ease: [0.33, 1, 0.68, 1],  delay: 0.075 * i}})
+    initial: { y: "100%" },
+    enter: (i: number) => ({ y: "0", transition: { duration: 0.75, ease: [0.33, 1, 0.68, 1], delay: 0.075 * i } })
   }
 
-  return(
+  return (
     <div ref={body} className={styles.maskText}>
       <div className={styles.lineMask}>
         <motion.p custom={0} className="m-0" variants={animation} initial="initial" animate={isInView ? "enter" : ""}>
