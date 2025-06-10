@@ -11,6 +11,8 @@ import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { BackgroundLines } from "@/components/background-lines";
+import React from "react";
+import { GoogleGeminiEffect } from "@/components/google-gemini-effect";
 
 const Earth = dynamic(() => import('@/components/earth'), {
   ssr: false,
@@ -44,15 +46,9 @@ const testimonials = [
   },
 ];
 
-const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
-
 export default function Home() {
   const container = useRef<HTMLDivElement | null>(null);
   const container1 = useRef<HTMLDivElement | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const slidesToShow = 3;
-  const totalSlides = extendedTestimonials.length;
-  const slideWidth = 100 / slidesToShow;
 
   const { scrollYProgress: scrollYProgressContainer } = useScroll({
     target: container,
@@ -77,7 +73,7 @@ export default function Home() {
     const animationFrameId = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(animationFrameId); // Cleanup on unmount
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -103,6 +99,18 @@ export default function Home() {
       splide.destroy();
     };
   }, []);
+
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+ 
+  const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
+  const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
+  const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
+  const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
+  const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0.01, 1.2]);
 
   return (
     <main>
@@ -166,7 +174,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="marquee overflow-hidden py-[80px] flex flex-col gap-10">
+      {/* <section className="marquee overflow-hidden py-[80px] flex flex-col gap-10">
         <Marquee gap={30} speed={300}>
           <div className="flex gap-12">
             <p className="text-8xl font-sans font-bold uppercase text__stroke">-</p>
@@ -197,11 +205,11 @@ export default function Home() {
             <p className="text-8xl font-sans font-bold uppercase text-stroke">development</p>
           </div>
         </Marquee>
-      </section>
+      </section> */}
 
       <section
         ref={container}
-        className="relative m-auto h-[200vh] pt-[50px]"
+        className="relative m-auto h-[200vh] pt-[100px]"
       >
         <div className="sticky top-0 overflow-hidden h-[100vh]">
           <motion.div style={{ scale }} className="w-[100%] h-[100%] px-[150px] top-0 absolute flex items-center justify-center">
@@ -372,8 +380,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-[100px]">
-        <div className="call-to-action_main">
+      <section className="py-[0px]">
+        {/* <div className="call-to-action_main">
           <div className="inner-wraper max-w-[1440px] m-auto flex flex-col items-center justify-center gap-5">
             <MaskText
               styles={{
@@ -408,6 +416,21 @@ export default function Home() {
               </a>
             </div>
           </div>
+        </div> */}
+
+        <div
+          className="h-[200vh] w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 pb-60 overflow-clip"
+          ref={ref}
+        >
+          <GoogleGeminiEffect
+            pathLengths={[
+              pathLengthFirst,
+              pathLengthSecond,
+              pathLengthThird,
+              pathLengthFourth,
+              pathLengthFifth,
+            ]}
+          />
         </div>
       </section>
     </main>
