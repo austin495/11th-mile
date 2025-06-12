@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { MaskText } from "@/app/page";
 import { AnimatePresence, motion } from "framer-motion";
-import { slideInUp } from "@/anim";
 
 const data = [
     {
@@ -58,7 +57,7 @@ export default function Header() {
     }, [isOpen]);
 
   return (
-    <div className="flex justify-between items-center max-w-[1440px] m-auto py-[40px]">
+    <div className="flex justify-between items-center max-w-[1300px] m-auto py-[40px]">
         <div className="flex items-center justify-between gap-[20px] w-full z-99999">
             <div>
                 <Image src="/11thMile-logo.png" alt="11th Mile Logo" width={150} height={50} quality={100} />
@@ -79,7 +78,7 @@ export default function Header() {
                     : '[transform:translate3d(0px,-110%,0px)_scale3d(1,1,1)_rotateX(0deg)_rotateY(0deg)_rotateZ(0deg)_skew(0deg,0deg)]'
                 }`}
         >
-            <div className="flex justify-between items-center max-w-[1440px] m-auto h-full">
+            <div className="flex justify-between items-center max-w-[1300px] m-auto h-full">
                 <div className="flex flex-col items-start justify-between h-full w-[60%]">
                     <div className="flex flex-col items-start gap-[20px]">
                         {isOpen && (

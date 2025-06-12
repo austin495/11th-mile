@@ -1,17 +1,32 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
 
 const Preloader = ({ siteName = "11th Mile" }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const headingRef = useRef(null)
   const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+
+    if (headingRef.current) {
+      gsap.set(headingRef.current, { opacity: 1 });
+      const split = new SplitText(headingRef.current, { type: 'chars' });
+      gsap.from(split.chars, {
+        y: -20,
+        autoAlpha: 0,
+        stagger: 0.05,
+        duration: 0.10,
+        ease: 'easeOut',
+      });
+    }
 
     return () => clearTimeout(timer);
   }, []);
@@ -31,6 +46,8 @@ const Preloader = ({ siteName = "11th Mile" }) => {
           }}
         >
           <motion.div
+            ref={headingRef}
+            id="heading"
             className="text-white text-8xl font-sans font-light uppercase tracking-[5px] drop-shadow-lg"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }}

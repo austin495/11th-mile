@@ -38,3 +38,29 @@ export const slideInUp = {
         transition: { duration: 0.5, ease: "easeInOut" }
     }
 };
+
+export const menuSlide = {
+    initial: {x: "calc(100% + 100px)"},
+    enter: {x: "0", transition: {duration: 0.8, ease: [0.76, 0, 0.24, 1]}},
+    exit: {x: "calc(100% + 100px)", transition: {duration: 0.8, ease: [0.76, 0, 0.24, 1]}}
+}
+
+export const slide = {
+  initial: { x: 20, opacity: 0 },
+  enter: (index) => ({
+    x: 0,
+    opacity: 1,
+    transition: { delay: index * 0.1, duration: 0.3 },
+  }),
+  exit: { x: 20, opacity: 0, transition: { duration: 0.3 } },
+};
+
+export const arrowSlide = {
+  initial: { x: -10, opacity: 0 },
+  hover: { x: 0, opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } },
+};
+
+export const scale = {
+    open: {scale: 1, transition: {duration: 0.3}},
+    closed: {scale: 0, transition: {duration: 0.4}}
+}

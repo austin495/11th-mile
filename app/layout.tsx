@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Preloader from "@/components/preloader";
+import SideBar from "@/components/side-bar";
 
 const lato = Lato({
   variable: "--font-lato-sans",
@@ -29,7 +30,8 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         className={`${lato.variable} ${bodonoModa.variable} antialiased text-white`}
       >
         <Preloader siteName="11th Mile" />
-        <Header />
+        {/* <Header /> */}
+        <SideBar />
         {children}
         <Footer />
       </body>
