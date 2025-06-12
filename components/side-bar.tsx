@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import Nav from './nav';
 
 export default function SideBar() {
-    const [isActive, setIsActive] = useState(true);
+    const [isActive, setIsActive] = useState(false);
 
     const toggleMenu = () => {
         setIsActive(!isActive);
