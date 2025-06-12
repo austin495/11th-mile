@@ -41,7 +41,7 @@ export default function Nav() {
       initial="initial" 
       animate="enter" 
       exit="exit" 
-      className="h-[100vh] w-[650px] bg-[#0f0f0f] fixed right-0 top-0"
+      className="h-[100vh] w-[700px] bg-[#0f0f0f] fixed right-0 top-0"
       >
        <div className="box-border h-full py-[100px] px-[50px] flex flex-row flex-wrap justify-between">
             <div onMouseLeave={() => {setSelectedIndicator(pathname)}} className="flex flex-col text-[55px] gap-[12px] mt-[30px] w-[80%]">
@@ -95,29 +95,61 @@ export default function Nav() {
                 <div className="flex flex-row justify-between w-full pb-[5px] border-b-1 border-b-[#ffffff34]">
                     <Link
                         href="#"
-                        className="uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full"
+                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full flex items-center gap-1"
                     >
                         Branding & Positioning
+                        <Image
+                            src="/circle-arrow-right.svg"
+                            width={25}
+                            height={25}
+                            quality={100}
+                            alt="Right arrow"
+                            className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-200 ease-out group-hover:rotate-40"
+                        />
                     </Link>
                     <Link
                         href="#"
-                        className="uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full text-right"
+                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full text-right flex items-center gap-1"
                     >
                         Physical & Digital Product Design
+                        <Image
+                            src="/circle-arrow-right.svg"
+                            width={25}
+                            height={25}
+                            quality={100}
+                            alt="Right arrow"
+                            className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-200 ease-out group-hover:rotate-40"
+                        />
                     </Link>
                 </div>
                 <div className="flex flex-row justify-between w-full pt-[5px]">
                     <Link
                         href="#"
-                        className="uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full"
+                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full flex items-center gap-1"
                     >
                         Marketing Strategy & Execution
+                        <Image
+                            src="/circle-arrow-right.svg"
+                            width={25}
+                            height={25}
+                            quality={100}
+                            alt="Right arrow"
+                            className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-200 ease-out group-hover:rotate-40"
+                        />
                     </Link>
                     <Link
                         href="#"
-                        className="uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full text-right"
+                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-[60%] text-right flex items-center gap-1"
                     >
                         Schedule First Meeting
+                        <Image
+                            src="/circle-arrow-right.svg"
+                            width={25}
+                            height={25}
+                            quality={100}
+                            alt="Right arrow"
+                            className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-200 ease-out group-hover:rotate-40"
+                        />
                     </Link>
                 </div>
             </div>
