@@ -398,6 +398,12 @@ export default function Home() {
         
           <main className="h-[60vw] my-0 relative flex items-center justify-center">
             <Earth style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
+            <div className="relative w-[37%] h-[60%]">
+              <div className="w-full h-full absolute bg-white rounded-full globe-shadow z-[-1]"></div>
+              <div className="w-full h-full absolute bg-white rounded-full globe-shadow-1 z-[-1]"></div>
+              <div className="w-full h-full absolute bg-white rounded-full globe-shadow-2 z-[-1]"></div>
+              <div className="w-full h-full absolute bg-white rounded-full globe-shadow-3 z-[-1]"></div>
+            </div>
             <div className="flex items-center justify-center absolute w-full max-w-[1300px] z-1">
               <div className="w-full flex flex-col items-center justify-center">
                 {

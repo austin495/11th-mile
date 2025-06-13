@@ -240,6 +240,22 @@ html.no-scroll body {
   opacity: 1;
 }
 
+.globe-shadow {
+  box-shadow: 0 0 244px 3px #D49142;
+}
+
+.globe-shadow-1 {
+  box-shadow: 0 0 111px 0px #F95F00;
+}
+
+.globe-shadow-2 {
+  box-shadow: 0 0 44px 0px #E27439;
+}
+
+.globe-shadow-3 {
+  box-shadow: 0 0 80px 3px #eb6a0079;
+}
+
 @keyframes lineMove {
   0% {
     top: 0;
