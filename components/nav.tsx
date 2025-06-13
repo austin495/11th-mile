@@ -95,7 +95,7 @@ export default function Nav() {
                 <div className="flex flex-row justify-between w-full pb-[5px] border-b-1 border-b-[#ffffff34]">
                     <Link
                         href="#"
-                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full flex items-center gap-1"
+                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] flex items-center gap-1"
                     >
                         Branding & Positioning
                         <Image
@@ -109,7 +109,7 @@ export default function Nav() {
                     </Link>
                     <Link
                         href="#"
-                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full text-right flex items-center gap-1"
+                        className="group uppercase font-sans font-normal text-[15px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] text-right flex items-center gap-1"
                     >
                         Physical & Digital Product Design
                         <Image
@@ -125,7 +125,7 @@ export default function Nav() {
                 <div className="flex flex-row justify-between w-full pt-[5px]">
                     <Link
                         href="#"
-                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-full flex items-center gap-1"
+                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] flex items-center gap-1"
                     >
                         Marketing Strategy & Execution
                         <Image
@@ -139,7 +139,7 @@ export default function Nav() {
                     </Link>
                     <Link
                         href="#"
-                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] w-[60%] text-right flex items-center gap-1"
+                        className="group uppercase font-sans font-normal text-[16px] text-[#636363] leading-[1.4em] tracking-tight hover:text-[#fff] text-right flex items-center gap-1"
                     >
                         Schedule First Meeting
                         <Image
