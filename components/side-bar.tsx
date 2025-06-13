@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from "next/image";
 import { AnimatePresence } from 'framer-motion';
 import Nav from './nav';
@@ -10,6 +10,26 @@ export default function SideBar() {
     const toggleMenu = () => {
         setIsActive(!isActive);
     }
+
+    useEffect(() => {
+            const scrollContainer = document.documentElement; // Lenis often uses <html> as the scroll container
+    
+            if (isActive) {
+                // Add no-scroll class to html instead of body
+                scrollContainer.classList.add('no-scroll');
+                // Optionally disable Lenis scrolling if you have access to the instance
+                // Example: lenis.stop(); // Uncomment if you have Lenis instance
+            } else {
+                scrollContainer.classList.remove('no-scroll');
+                // Example: lenis.start(); // Uncomment if you have Lenis instance
+            }
+    
+            // Cleanup on unmount
+            return () => {
+                scrollContainer.classList.remove('no-scroll');
+                // Example: lenis.start(); // Uncomment if you have Lenis instance
+            };
+        }, [isActive]);
 
     return (
         <div className="flex justify-between items-center max-w-[1300px] m-auto py-[40px]">
