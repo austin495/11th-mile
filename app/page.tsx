@@ -395,9 +395,9 @@ export default function Home() {
       </section>
 
       <section>
-        <SmoothScroll>
+        
           <main className="h-[60vw] my-0 relative flex items-center justify-center">
-            <Earth />
+            <Earth style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
             <div className="flex items-center justify-center absolute w-full max-w-[1300px] z-1">
               <div className="w-full flex flex-col items-center justify-center">
                 {
@@ -409,7 +409,7 @@ export default function Home() {
               <Modal modal={modal} services={services}/>
             </div>
           </main>
-        </SmoothScroll>
+        
       </section>
 
       <div ref={container1} className="relative h-[300vh]">

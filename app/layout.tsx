@@ -29,7 +29,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
       <body
         className={`${lato.variable} ${bodonoModa.variable} antialiased text-white`}
       >
-        <Preloader siteName="11th Mile" />
+        {/* <Preloader siteName="11th Mile" /> */}
         {/* <Header /> */}
         <SideBar />
         {children}
