@@ -44,7 +44,7 @@ export default function Nav() {
       className="h-[100vh] w-[700px] bg-[#0f0f0f] fixed right-0 top-0"
       >
        <div className="box-border h-full py-[100px] px-[50px] flex flex-row flex-wrap justify-between">
-            <div onMouseLeave={() => {setSelectedIndicator(pathname)}} className="flex flex-col text-[55px] gap-[12px] mt-[30px] w-[80%]">
+            <div onMouseLeave={() => {setSelectedIndicator(pathname)}} className="flex flex-col text-[55px] gap-[12px] mt-[30px] w-[80%] h-[90%]">
                     {
                       navItems.map( (data, index) => {
                         return <CustomLink 
@@ -68,30 +68,45 @@ export default function Nav() {
                         className="block h-[15%] w-auto mr-[4px]"
                     />
                 <div className="flex flex-col gap-2">
-                    <Image
-                        src="/cluch.svg"
-                        width={20}
-                        height={20}
-                        quality={100}
-                        alt="Right arrow"
-                    />
-                    <Image
-                        src="/dribble.svg"
-                        width={20}
-                        height={20}
-                        quality={100}
-                        alt="Right arrow"
-                    />
-                    <Image
-                        src="/linkedin.svg"
-                        width={20}
-                        height={20}
-                        quality={100}
-                        alt="Right arrow"
-                    />
+                    <Link
+                        href="#"
+                        className="opacity-20 hover:opacity-100"
+                    >
+                        <Image
+                            src="/cluch.svg"
+                            width={20}
+                            height={20}
+                            quality={100}
+                            alt="Right arrow"
+                        />
+                    </Link>
+                    <Link
+                        href="#"
+                        className="opacity-20 hover:opacity-100"
+                    >
+                        <Image
+                            src="/dribble.svg"
+                            width={20}
+                            height={20}
+                            quality={100}
+                            alt="Right arrow"
+                        />
+                    </Link>
+                    <Link
+                        href="#"
+                        className="opacity-20 hover:opacity-100"
+                    >
+                        <Image
+                            src="/linkedin.svg"
+                            width={20}
+                            height={20}
+                            quality={100}
+                            alt="Right arrow"
+                        />
+                    </Link>
                 </div>
             </div>
-            <div className="flex flex-col w-full justify-between text-[12px]">
+            <div className="flex flex-col w-full items-center justify-between text-[12px]">
                 <div className="flex flex-row justify-between w-full pb-[5px] border-b-1 border-b-[#ffffff34]">
                     <Link
                         href="#"

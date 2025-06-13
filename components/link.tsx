@@ -20,11 +20,12 @@ export default function CustomLink({data, isActive, setSelectedIndicator}: Custo
   
     return (
         <motion.div
-            className="relative flex items-center"
+            className="relative flex items-center border-b-1 border-b-[#ffffff34] overflow-hidden"
             onMouseEnter={() => {
                 console.log('Hovering:', href);
-                setSelectedIndicator(href)
+                setSelectedIndicator(href);
             }}
+            onMouseLeave={() => console.log('Hover ended:', href)}
             custom={index}
             variants={slide}
             initial="initial"
@@ -35,20 +36,28 @@ export default function CustomLink({data, isActive, setSelectedIndicator}: Custo
             <motion.span
                 variants={arrowSlide}
                 initial="initial"
-                className="absolute left-[-30px] top-1/2 -translate-y-1/2 text-[#E35839]"
+                className="absolute left-[0px]"
             >
                 <Image
-                    src="/arrow-right-big.svg"
-                    width={20}
-                    height={20}
-                    quality={100}
-                    alt="Right arrow"
+                src="/arrow-right-big.svg"
+                width={200}
+                height={20}
+                quality={100}
+                alt="Right arrow"
                 />
             </motion.span>
             <Link
                 href={href}
-                className="uppercase font-sans font-semibold text-[#636363] leading-[1.4em] tracking-tight hover:text-[#E35839] border-b-1 border-b-[#ffffff34] w-full"
+                className="group uppercase font-sans font-semibold text-[#636363] leading-[1.4em] tracking-tight hover:text-[#E35839] flex"
             >
+                {/* <Image
+                    src="/arrow-right-big.svg"
+                    width={200}
+                    height={20}
+                    quality={100}
+                    alt="Right arrow"
+                    className="mr-2 -translate-x-[200px] group-hover:translate-x-0 transition-transform duration-300 ease-out"
+                /> */}
                 {title}
             </Link>
         </motion.div>

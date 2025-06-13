@@ -15,6 +15,7 @@ import Modal from "@/components/modal";
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { InfiniteMovingCards } from '@/components/infinite-moving-cards';
+import Link from 'next/link';
 
 const Earth = dynamic(() => import('@/components/earth'), {
   ssr: false,
@@ -143,6 +144,9 @@ const testimonialsSec = [
 export default function Home() {
   const container = useRef<HTMLDivElement | null>(null);
   const container1 = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef(null);
+  const containerRef1 = useRef(null);
+  const containerRef2 = useRef(null);
   const [modal, setModal] = useState<ModalState>({ active: false, index: 0 });
   const [playingVideoId, setPlayingVideoId] = useState<string | number | null>(null);
 
@@ -165,6 +169,78 @@ export default function Home() {
   });
 
   const scale = useTransform(scrollYProgressContainer, [0, 1], [1, 1.3]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-after-line');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-after-to-right-line');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef1.current) {
+      observer.observe(containerRef1.current);
+    }
+
+    return () => {
+      if (containerRef1.current) {
+        observer.unobserve(containerRef1.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-after-to-right-line');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef2.current) {
+      observer.observe(containerRef2.current);
+    }
+
+    return () => {
+      if (containerRef2.current) {
+        observer.unobserve(containerRef2.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -342,7 +418,7 @@ export default function Home() {
         <Section3 scrollYProgress={scrollYProgressContainer1} />
       </div>
 
-      <section className="testimonial py-[100px] flex flex-col items-center gap-10">
+      <section className="testimonial py-[100px] px-[50px] flex flex-col items-center gap-10">
         <div className="max-w-[1440px] m-auto flex flex-col items-center gap-10">
           <MaskText
             styles={{
@@ -357,8 +433,8 @@ export default function Home() {
             <ul className="splide__list">
               {testimonials.map((testimonial) => (
                 <li key={testimonial.id} className="splide__slide">
-                  <div className="p-5 bg-white rounded-[20px] shadow-lg h-full flex flex-row items-center">
-                    <div className="text-left w-[50%]">
+                  <div className="p-5 bg-white rounded-[20px] shadow-lg h-full flex flex-row items-center justify-between">
+                    <div className="text-left w-[55%]">
                       <Image
                         src={testimonial.logo}
                         alt={`${testimonial.name} logo`}
@@ -366,7 +442,7 @@ export default function Home() {
                         height={50}
                         className="mb-4"
                       />
-                      <p className="text-gray-800 mb-4 text-3xl font-sans font-medium">{testimonial.text}</p>
+                      <p className="text-gray-800 mb-4 text-[22px] font-sans font-medium">{testimonial.text}</p>
                       <p className="font-sans text-lg text-gray-600">{testimonial.name}</p>
                       <p className="font-sans text-sm text-gray-500">{testimonial.title}</p>
                       <a
@@ -380,7 +456,7 @@ export default function Home() {
                         Watch Video →
                       </a>
                     </div>
-                    <div className="testimonial-image w-[50%] h-full relative">
+                    <div className="testimonial-image w-[43%] h-full relative">
                       {playingVideoId === testimonial.id ? (
                         <video
                           src={testimonial.video}
@@ -404,7 +480,7 @@ export default function Home() {
                               e.preventDefault();
                               handlePlayVideo(testimonial.id);
                             }}
-                            className="text-white inline-flex items-center bg-[#FF5935] w-[28%] h-[20%] rounded-full justify-center p-[10px] absolute bottom-[20px] left-[30px]"
+                            className="text-white inline-flex items-center bg-[#FF5935] w-[28%] h-[21%] rounded-full justify-center p-[10px] absolute bottom-[20px] left-[30px]"
                           >
                             <svg
                               className="w-full h-full"
@@ -468,43 +544,6 @@ export default function Home() {
       </section>
 
       <section className="py-[0px]">
-        {/* <div className="call-to-action_main">
-          <div className="inner-wraper max-w-[1440px] m-auto flex flex-col items-center justify-center gap-5">
-            <MaskText
-              styles={{
-                maskText: "text-[45px] font-sans font-semibold w-[40%] text-center leading-[1.2em]",
-                lineMask: "overflow-hidden",
-              }}
-              title="Accelerate your team's content creation process."
-            />
-            <p className="text-[18px] font-sans font-normal">Join over 20,000+ companies who accelerated their growth with Mixpanel</p>
-            <div className="relative inline-flex items-center justify-center gap-4 mt-[15px] group">
-              <div
-                className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
-              </div>
-              <a
-                href="#"
-                title="payment"
-                className="group relative inline-flex items-center justify-center text-base rounded-xl bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30"
-                role="button"
-              >
-                Learn More
-                <svg
-                  className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
-                  fill="none"
-                  width="10"
-                  height="10"
-                  viewBox="0 0 10 10"
-                  aria-hidden="true"
-                >
-                  <path className="transition opacity-0 group-hover:opacity-100" d="M0 5h7"></path>
-                  <path className="transition group-hover:translate-x-[5px]" d="M1 1l4 4-4 4"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div> */}
-
         <div
           className="h-[200vh] w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 pb-60 overflow-clip"
           ref={ref}
@@ -522,106 +561,170 @@ export default function Home() {
       </section>
 
       <section className="pb-[100px]">
-        <div className=" max-w-[1300px] m-auto flex flex-row bg-[#ffffff] backdrop-blur-[40px] rounded-[50px]">          
-          <div className="w-[40%] flex flex-col gap-10 p-[50px] bg-[#ff5935] rounded-l-[50px]">
+        <div className="max-w-[1140px] m-auto flex flex-row bg-[#060606bf] border-1 border-[#ffffff33] backdrop-blur-[40px] rounded-[50px]">          
+          <div
+            ref={containerRef}
+            className="relative w-[40%] flex flex-col justify-center gap-5 p-[50px] after:content-[''] after:w-[1px] after:h-full after:absolute after:top-0 after:right-0 after:bg-[#ffffff33] after:opacity-0"
+          >
             <div className="flex flex-col gap-2">
               <MaskText
                 styles={{
-                  maskText: "text-[45px] text-[#181818] font-sans font-bold leading-[1.2em]",
+                  maskText: "text-[45px] text-[#fff] font-sans font-bold leading-[1.2em]",
+                  lineMask: "overflow-hidden",
+                }}
+                title="Get In Touch"
+              />
+              <p className="font-sans font-normal text-[16px] text-[#ffffffad]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad</p>
+            </div>
+            <Image
+              src="/freepik-reimagine.webp"
+              width={300}
+              height={100}
+              alt=""
+              quality={100}
+              className="w-full rounded-[10px]"
+            />
+            <div className="w-full flex items-center gap-3">
+              <p className="uppercase font-sans font-normal text-[#636363] leading-[1em] tracking-wide block w-auto">Follow Us On</p>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="#"
+                  className="opacity-20 hover:opacity-100"
+                >
+                  <Image
+                    src="/cluch.svg"
+                    width={20}
+                    height={20}
+                    quality={100}
+                    alt="Right arrow"
+                  />
+                </Link>
+                <Link
+                  href="#"
+                  className="opacity-20 hover:opacity-100"
+                >
+                  <Image
+                    src="/dribble.svg"
+                    width={20}
+                    height={20}
+                    quality={100}
+                    alt="Right arrow"
+                  />
+                </Link>
+                <Link
+                  href="#"
+                  className="opacity-20 hover:opacity-100"
+                >
+                  <Image
+                    src="/linkedin.svg"
+                    width={20}
+                    height={20}
+                    quality={100}
+                    alt="Right arrow"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-[60%] flex flex-col justify-center gap-10">
+            <div
+              ref={containerRef1}
+              className="p-[50px] relative after:content-[''] after:w-full after:h-[1px] after:absolute after:bottom-0 after:left-0 after:bg-[#ffffff33] after:opacity-0"
+            >
+              <MaskText
+                styles={{
+                  maskText: "text-[45px] text-[#fff] font-sans font-bold leading-[1.2em]",
                   lineMask: "overflow-hidden",
                 }}
                 title="let's Discuss Your Project"
               />
-              <p className="font-sans font-normal text-[16px] text-[#0000008a]">Let's turn your vision into measurable online results today.</p>
             </div>
-            <div>
+            <div className="px-[50px]">
               <form action="" className="flex flex-row flex-wrap justify-between gap-x-2 gap-y-4">
                 <div className="w-[49%] flex flex-col gap-1">
                   <label
                     htmlFor="firstName"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     First Name
                   </label>
                   <Input 
                     id="firstName"
-                    className="text-[#181818] rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                   />
                 </div>
                 <div className="w-[49%] flex flex-col gap-1">
                   <label
                     htmlFor="lastName"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     Last Name
                   </label>
                   <Input
                     id="lastName"
-                    className="text-[#181818] rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                   />
                 </div>
                 <div className="w-[49%] flex flex-col gap-1">
                   <label
                     htmlFor="email"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     Email Address
                   </label>
                   <Input
                     id="email"
-                    className="text-[#181818] rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                   />
                 </div>
                 <div className="w-[49%] flex flex-col gap-1">
                   <label
                     htmlFor="phone"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     Phone Number
                   </label>
                   <Input
                     id="phone"
-                    className="text-[#181818] rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                   />
                 </div>
                 <div className="w-[100%] flex flex-col gap-1">
                   <label
                     htmlFor="company"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     Company
                   </label>
                   <Input
                     id="Company"
-                    className="text-[#181818] rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                   />
                 </div>
                 <div className="w-[100%] flex flex-col gap-1">
                   <label
                     htmlFor="message"
-                    className="text-[14px] text-[#000000b9] font-sans font-normal"
+                    className="text-[14px] text-[#ffffff] font-sans font-normal uppercase"
                   >
                     What Can We Help You?
                   </label>
                   <Textarea
                     id="message"
-                    className="text-[#181818] min-h-30 rounded-[5px] border-[#00000059] focus-visible:ring-[0px] focus-visible:border-[#181818] focus-visible:border-[2px] p-[20px]"
+                    className="text-[#fff] bg-[#d9d9d90d] rounded-[0px] border-[0] border-b-[1px] border-[#ffffff33] focus-visible:ring-[0px] focus-visible:border-[#ffffff33] focus-visible:border-[2px] p-[20px]"
                     rows={10}
                   />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="relative inline-flex items-center justify-center gap-4 mt-[15px] group">
-                    <div
-                      className="absolute inset-0 duration-1000 opacity-60 transitiona-all bg-gradient-to-r from-[#ff5a35c2] to-white rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
-                    </div>
+                <div className="flex flex-col gap-1 w-full">
+                  <div className="relative w-full inline-flex items-center justify-center gap-4 mt-[15px] group">
                     <button
                       type="submit"
-                      className="group relative inline-flex items-center justify-center text-base rounded-[5px] bg-gray-900 px-8 py-3 font-semibold text-white transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 hover:shadow-gray-600/30 hover:cursor-pointer"
+                      className="group relative w-full inline-flex items-center justify-center text-base border-[1px] border-[#fff] rounded-[0px] bg-[#fff] px-8 py-3 font-semibold text-[#181818] uppercase transition-all duration-200 hover:border-[#FF5935] hover:bg-transparent hover:text-white hover:shadow-lg hover:-translate-y-0.5 hover:cursor-pointer"
                       role="button"
                     >
                       Submit Now
                       <svg
-                        className="mt-0.5 ml-2 -mr-1 stroke-white stroke-2"
+                        className="mt-0.5 ml-2 -mr-1 stroke-[#181818] stroke-2 group-hover:stroke-[#fff]"
                         fill="none"
                         width="10"
                         height="10"
@@ -636,10 +739,26 @@ export default function Home() {
                 </div>
               </form>
             </div>
-          </div>
-
-          <div className="w-[60%] p-[50px] flex flex-col justify-center items-center">
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1f38FHNWf6DJvNwnvQbbVhhOiQnkPE-P5kRp8y4v8C3RxAz1X2SaBqiAnTx59A5WtYDe06AOfJ?gv=true" width="100%" height="600"></iframe>
+            <div
+              ref={containerRef2}
+              className="p-[50px] relative after:content-[''] after:w-full after:h-[1px] after:absolute after:top-0 after:left-0 after:bg-[#ffffff33] after:opacity-0"
+            >
+              <Link
+                  href="https://calendar.app.google/7Bn9qzLRvd5MH3yA8"
+                  target='_blank'
+                  className="group uppercase font-sans font-normal text-[24px] text-[#fff] leading-[1.4em] tracking-tight hover:text-[#fff] flex items-center gap-1"
+              >
+                Schedule First Meeting
+                <Image
+                  src="/circle-arrow-right.svg"
+                  width={30}
+                  height={30}
+                  quality={100}
+                  alt="Right arrow"
+                  className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-200 ease-out group-hover:rotate-45"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

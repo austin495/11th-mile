@@ -12,22 +12,16 @@ export default function SideBar() {
     }
 
     useEffect(() => {
-            const scrollContainer = document.documentElement; // Lenis often uses <html> as the scroll container
+            const scrollContainer = document.documentElement;
     
             if (isActive) {
-                // Add no-scroll class to html instead of body
                 scrollContainer.classList.add('no-scroll');
-                // Optionally disable Lenis scrolling if you have access to the instance
-                // Example: lenis.stop(); // Uncomment if you have Lenis instance
             } else {
                 scrollContainer.classList.remove('no-scroll');
-                // Example: lenis.start(); // Uncomment if you have Lenis instance
             }
-    
-            // Cleanup on unmount
+
             return () => {
                 scrollContainer.classList.remove('no-scroll');
-                // Example: lenis.start(); // Uncomment if you have Lenis instance
             };
         }, [isActive]);
 

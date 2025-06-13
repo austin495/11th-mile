@@ -56,8 +56,18 @@ export const slide = {
 };
 
 export const arrowSlide = {
-  initial: { x: -10, opacity: 0 },
-  hover: { x: 0, opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } },
+  initial: {
+    x: -200, // Start 50px to the left, adjust based on arrow size
+    opacity: 0, // Start invisible for a fade-in effect
+  },
+  hover: {
+    x: 0, // Slide to final position
+    opacity: 1, // Fade in
+    transition: {
+      duration: 0.3, // Matches a smooth slide as in the image
+      ease: "easeOut",
+    },
+  },
 };
 
 export const scale = {

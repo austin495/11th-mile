@@ -222,6 +222,24 @@ html.no-scroll body {
   z-index: 1;
 }
 
+.animate-line-move {
+  animation: lineMove 2s ease-in-out infinite;
+}
+
+.text-vertical {
+  writing-mode: sideways-rl;
+}
+
+.animate-after-line::after {
+  animation: drawLine 2s ease-in-out forwards;
+  opacity: 1;
+}
+
+.animate-after-to-right-line::after {
+  animation: drawLineToRight 2s ease-in-out forwards;
+  opacity: 1;
+}
+
 @keyframes lineMove {
   0% {
     top: 0;
@@ -233,10 +251,21 @@ html.no-scroll body {
     top: 0;
   }
 }
-.animate-line-move {
-  animation: lineMove 2s ease-in-out infinite;
+
+@keyframes drawLine {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
 }
 
-.text-vertical {
-  writing-mode: sideways-rl;
+@keyframes drawLineToRight {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
