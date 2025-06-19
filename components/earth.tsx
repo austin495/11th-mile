@@ -85,7 +85,7 @@ function EarthMesh() {
 
   useFrame(() => {
     if (earthRef.current) {
-      earthRef.current.rotation.y += 0.002;
+      earthRef.current.rotation.y += 0.0008;
     }
   });
 
@@ -129,8 +129,8 @@ function Atmosphere() {
     vertexShader: atmosphereVertexShader,
     fragmentShader: atmosphereFragmentShader,
     uniforms: {
-      glowColor: { value: new Color(0xFFFFFF) }, // White atmosphere
-      opacity: { value: 1 }, // Adjust opacity for glow intensity
+      glowColor: { value: new Color(0xFFFFFF) },
+      opacity: { value: 1 },
     },
     transparent: true,
     side: BackSide,
@@ -139,7 +139,7 @@ function Atmosphere() {
 
   useFrame(() => {
     if (atmosphereRef.current) {
-      atmosphereRef.current.rotation.y += 0.001; // Slight rotation for effect
+      atmosphereRef.current.rotation.y += 0.001;
     }
   });
 
@@ -164,7 +164,7 @@ export default function Earth({ style }: { style?: React.CSSProperties }) {
       style={style || { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
     >
       <ambientLight intensity={0.1} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <directionalLight position={[1, 0, 0.5]} intensity={1} />
       <Suspense fallback={null}>
         <EarthMesh />
         <SunMesh />

@@ -2,7 +2,6 @@
 import { useScroll, useTransform, motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import dynamic from "next/dynamic";
-import SmoothScroll from "@/components/smoothScroll";
 import Image from "next/image";
 import Lenis from "lenis";
 import Splide from "@splidejs/splide";
@@ -102,7 +101,7 @@ const services: Service[] = [
     src: "marketing.mp4",
     color: "#EFE8D3"
   }
-]
+];
 
 const testimonialsSec = [
   {
@@ -395,7 +394,6 @@ export default function Home() {
       </section>
 
       <section>
-        
           <main className="h-[60vw] my-0 relative flex items-center justify-center">
             <Earth style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
             <div className="relative w-[37%] h-[60%]">
@@ -415,7 +413,6 @@ export default function Home() {
               <Modal modal={modal} services={services}/>
             </div>
           </main>
-        
       </section>
 
       <div ref={container1} className="relative h-[300vh]">
